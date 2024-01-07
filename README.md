@@ -119,7 +119,7 @@ Breakdown:
 2. Clone this repository:
 
     ```bash
-    git clone https://github.com/your-username/receipt-api.git
+    git clone https://github.com/nashibdahal321/receipt-api.git
     ```
 
 3. Navigate to the project directory:
@@ -146,7 +146,7 @@ Breakdown:
 2. Clone this repository:
 
     ```bash
-    git clone https://github.com/your-username/receipt-api.git
+    git clone https://github.com/nashibdahal321/receipt-api.git
     ```
 
 3. Navigate to the project directory:
