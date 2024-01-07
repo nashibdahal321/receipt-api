@@ -31,7 +31,7 @@ The rules for awarding points to a receipt are outlined in the API specification
 
 ## Examples
 
-### Example 1
+## Examples
 
 ```json
 {
@@ -58,7 +58,8 @@ The rules for awarding points to a receipt are outlined in the API specification
   ],
   "total": "35.35"
 }
-
+```
+```text
 Total Points: 28
 Breakdown:
      6 points - retailer name has 6 characters
@@ -70,8 +71,10 @@ Breakdown:
      6 points - purchase day is odd
   + ---------
   = 28 points
+```
 
-### Example 2
+----
+
 ```json
 {
   "retailer": "M&M Corner Market",
@@ -95,7 +98,7 @@ Breakdown:
   "total": "9.00"
 }
 ```
-
+```text
 Total Points: 109
 Breakdown:
     50 points - total is a round dollar amount
@@ -106,7 +109,7 @@ Breakdown:
     10 points - 4 items (2 pairs @ 5 points each)
   + ---------
   = 109 points
-
+```
 
 ## How to Run
 
