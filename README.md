@@ -94,6 +94,7 @@ Breakdown:
   ],
   "total": "9.00"
 }
+```
 
 Total Points: 109
 Breakdown:
