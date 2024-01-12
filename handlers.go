@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"math"
 	"net/http"
 	"strconv"
@@ -10,6 +9,7 @@ import (
 	"time"
 	"unicode"
 
+	"github.com/google/uuid"
 	"github.com/gorilla/mux"
 )
 
@@ -37,7 +37,8 @@ func ProcessReceipt(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	receiptID := fmt.Sprintf("%x", time.Now().UnixNano())
+	// Generate a UUID as the receipt ID
+	receiptID := uuid.New().String()
 	receiptMap[receiptID] = &receipt
 	receiptMap[receiptID].ProcessedTime = time.Now()
 
