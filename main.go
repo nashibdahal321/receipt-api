@@ -51,6 +51,20 @@ func ProcessReceipt(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// Validate required fields
+	if receipt.Retailer == "" || receipt.PurchaseDate == "" || receipt.PurchaseTime == "" || len(receipt.Items) == 0 || receipt.Total == "" {
+		http.Error(w, "The receipt is invalid", http.StatusBadRequest)
+		return
+	}
+
+	// Validate item prices
+	for _, item := range receipt.Items {
+		if item.Price == "" {
+			http.Error(w, "Item price cannot be blank", http.StatusBadRequest)
+			return
+		}
+	}
+
 	receiptID := fmt.Sprintf("%x", time.Now().UnixNano())
 	receiptMap[receiptID] = &receipt
 	receiptMap[receiptID].ProcessedTime = time.Now()
