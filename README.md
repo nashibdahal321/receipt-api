@@ -158,7 +158,7 @@ Breakdown:
 4. Build and run the Go application:
 
     ```bash
-    go build
+    go build ./...
     ./receipt-api
     ```
 
