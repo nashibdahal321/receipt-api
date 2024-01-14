@@ -29,7 +29,6 @@ The rules for awarding points to a receipt are outlined in the API specification
 - 6 points if the day in the purchase date is odd.
 - 10 points if the time of purchase is after 2:00 pm and before 4:00 pm.
 
-## Examples
 
 ## Examples
 
@@ -162,3 +161,18 @@ Breakdown:
     ./receipt-api
     ```
 
+## Testing
+
+### Unit Tests
+
+I've added unit tests to ensure the correctness of the code. The tests cover various aspects of the project, including:
+
+- [TestProcessReceipt](main/handler_test.go): Tests the processing of receipts.
+- [TestGetPoints](main/handler_test.go): Tests the calculation of points.
+- [TestCalculatePoints](calculator/calculator_test.go): Tests the calculator logic.
+
+To run the unit tests, use the following command:
+
+```bash
+go test ./...
+```
