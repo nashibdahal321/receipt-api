@@ -43,6 +43,65 @@ func TestProcessReceipt(t *testing.T) {
 	if status := rr.Code; status != http.StatusOK {
 		t.Errorf("ProcessReceipt returned wrong status code: got %v want %v", status, http.StatusOK)
 	}
+
+	// Create a malformed receipt for testing with zero items
+	receiptJSON = []byte(`{
+		"retailer": "Target",
+		"purchaseDate": "2022-01-01",
+		"purchaseTime": "13:01",
+		"items": [],
+		"total": "35.35"
+	}`)
+
+	// Create a request with the sample receipt
+	req, err = http.NewRequest("POST", "/receipts/process", bytes.NewBuffer(receiptJSON))
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	// Create a response recorder to capture the response
+	rr = httptest.NewRecorder()
+
+	// Call the handler function
+	http.HandlerFunc(ProcessReceipt).ServeHTTP(rr, req)
+
+	// Check the response status code
+	if status := rr.Code; status != http.StatusBadRequest {
+		t.Errorf("ProcessReceipt returned wrong status code: got %v want %v", status, http.StatusBadRequest)
+	}
+
+	// Create a malformed receipt for testing with no retailer name
+	receiptJSON = []byte(`{
+		"retailer": "",
+		"purchaseDate": "2022-01-01",
+		"purchaseTime": "13:01",
+		"items": [
+			{"shortDescription": "Mountain Dew 12PK", "price": "6.49"},
+			{"shortDescription": "Emils Cheese Pizza", "price": "12.25"},
+			{"shortDescription": "Knorr Creamy Chicken", "price": "1.26"},
+			{"shortDescription": "Doritos Nacho Cheese", "price": "3.35"},
+			{"shortDescription": "   Klarbrunn 12-PK 12 FL OZ  ", "price": "12.00"}
+		],
+		"total": "35.35"
+	}`)
+
+	// Create a request with the sample receipt
+	req, err = http.NewRequest("POST", "/receipts/process", bytes.NewBuffer(receiptJSON))
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	// Create a response recorder to capture the response
+	rr = httptest.NewRecorder()
+
+	// Call the handler function
+	http.HandlerFunc(ProcessReceipt).ServeHTTP(rr, req)
+
+	// Check the response status code
+	if status := rr.Code; status != http.StatusBadRequest {
+		t.Errorf("ProcessReceipt returned wrong status code: got %v want %v", status, http.StatusBadRequest)
+	}
+
 }
 
 func TestGetPoints(t *testing.T) {
